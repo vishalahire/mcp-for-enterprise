@@ -24,6 +24,30 @@ The decision tree is an architectural synthesis. A protocol specification establ
 - [OpenAPI Specification 3.2.1](https://spec.openapis.org/oas/v3.2.1.html)
 - [Anthropic on writing effective tools](https://www.anthropic.com/engineering/writing-tools-for-agents)
 
+## Agent and tool decision model
+
+Focused review — 11 November 2026.
+
+The revised [decision tree](decision-tree.md) starts with a caller needing current information from another system. A2A documentation distinguishes tool use from collaboration with an independent agent. MCP specifies a tool interface through which a caller can query systems and invoke computations. These roles can coexist.
+
+Anthropic's December 2024 article distinguishes predefined workflows from model-directed execution and discusses latency and cost tradeoffs. Its historical tooling examples carry an age warning, so this project uses its architectural reasoning. Anthropic's June 2025 research-system case study describes parallel research benefits alongside coordination and token costs. Its results are workload-specific.
+
+The resulting recommendation is to use bounded tool access for retrieval and predefined operations, and qualify specialist delegation when it adds needed expertise or task ownership. An existing caller can also reason over tools without adding another agent.
+
+The freshness contract, equivalent-workload benchmarking, bounded delegation and record-level authorization checks in the decision guide are this project's proposed design criteria. Protocol choice alone establishes none of those guarantees.
+
+| Evidence | Supports |
+| --- | --- |
+| MCP tools specification | Defined tool discovery and invocation for external capabilities |
+| A2A comparison | Complementary agent collaboration and tool integration roles |
+| Anthropic workflow guidance | Reasoning ownership and complexity tradeoffs |
+| Anthropic research-system case study | Evaluating parallelism, coordination and resource costs |
+| MCP security guidance | Trust boundaries, token handling and downstream security responsibilities |
+
+- [A2A and MCP comparison](https://a2a-protocol.org/latest/topics/a2a-and-mcp/)
+- [Anthropic building effective agents](https://www.anthropic.com/research/building-effective-agents)
+- [Anthropic multi-agent research system](https://www.anthropic.com/research/multi-agent-research-system)
+
 ## Provider implementation examples
 
 | Provider | Documented behavior | Deployment question |

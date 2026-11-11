@@ -2,7 +2,26 @@
 
 This design assigns responsibilities to components that organizations can map to their existing infrastructure.
 
-## Runtime paths
+## Responsibility before connectivity
+
+Start with the [tool versus agent decision](decision-tree.md). A caller that needs a current fact can query a bounded tool. A caller that needs another system to own an investigation can delegate to a qualified specialist.
+
+```mermaid
+flowchart TD
+    A["Calling agent"] -->|Bounded capability| T["Tool interface"]
+    A -->|Delegated task| B["Specialist agent"]
+    B -->|Scoped source access| T
+    T --> M["MCP gateway and server"]
+    T --> N["Native tool and managed API"]
+    M --> S["Internal or third-party systems"]
+    N --> S
+```
+
+The diagram shows logical alternatives. Each agent uses its own approved tool set and credentials. Agent delegation can use a framework-native interface, a service API or A2A according to the interaction contract.
+
+Define source freshness, consistency, evidence and response deadlines before implementing either route. For an agent result, preserve source observations separately from the time the agent generated its answer.
+
+## MCP runtime paths
 
 ```mermaid
 flowchart TD
