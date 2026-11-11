@@ -13,6 +13,14 @@ Use existing API, security and application governance as the foundation. Add a l
 | Security and data owners | Identity, external data boundaries, supplier risk and retention |
 | Business approver | Consequential changes within a defined scope of authority |
 
+## Apply governance to the selected integration
+
+Use the [system access decision tree](decision-tree.md) to select an API or MCP path per capability. API-backed agent tools retain API governance and also require review of tool semantics, consumer permissions, data destinations and runtime controls. They do not require an MCP server solely to enter governance.
+
+The lifecycle below describes MCP publication. For API tools, record equivalent contract and consumer evidence in the approved API/tool catalog, with a connector or tool owner accountable for the agent-facing integration. For another agent, use the [agent interaction decision tree](agent-interaction-decision-tree.md) and register its interaction contract. Apply [governed-action controls](governed-actions.md) to consequential operations on every path.
+
+An organization may mandate an MCP gateway for all MCP routes. Approved API tool routes must enforce the same required business policies through their API and runtime controls. Restrict unapproved alternative routes without treating a separately approved API integration as a bypass.
+
 ## Lifecycle
 
 1. Describe the capability, consumers and decision rationale using the [server review template](../templates/server-review.md).

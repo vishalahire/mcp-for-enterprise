@@ -2,24 +2,30 @@
 
 This design assigns responsibilities to components that organizations can map to their existing infrastructure.
 
-## Responsibility before connectivity
+## Agent access paths
 
-Start with the [tool versus agent decision](decision-tree.md). A caller that needs a current fact can query a bounded tool. A caller that needs another system to own an investigation can delegate to a qualified specialist.
+Start with the [system access decision](decision-tree.md). An agent can use existing managed APIs as tools or consume a qualified MCP interface. MCP often uses those same APIs downstream. Select per capability using functional fit, identity, governance, source freshness, measured performance and total ownership cost.
 
 ```mermaid
 flowchart TD
-    A["Calling agent"] -->|Bounded capability| T["Tool interface"]
-    A -->|Delegated task| B["Specialist agent"]
-    B -->|Scoped source access| T
-    T --> M["MCP gateway and server"]
-    T --> N["Native tool and managed API"]
-    M --> S["Internal or third-party systems"]
-    N --> S
+    A["Calling agent"] --> N["API tool or approved connector"]
+    A --> C["MCP client"]
+    N --> M["API management"]
+    C --> G["MCP gateway"]
+    G --> T["MCP server or bridge"]
+    T --> M
+    T --> V["Supported vendor integration"]
+    M --> S["Domain services"]
+    V --> U["Vendor services"]
 ```
 
-The diagram shows logical alternatives. Each agent uses its own approved tool set and credentials. Agent delegation can use a framework-native interface, a service API or A2A according to the interaction contract.
+These are logical alternatives. A gateway product may combine functions, and a vendor MCP service may own its downstream API route. Preserve mandatory enforcement without unnecessary duplicate hops.
 
-Define source freshness, consistency, evidence and response deadlines before implementing either route. For an agent result, preserve source observations separately from the time the agent generated its answer.
+API tools remain subject to approved API and agent-runtime controls. All MCP routes use the required MCP enforcement path. An approved API tool is not a bypass; an unapproved alternative route is.
+
+For a provider that is another agent, use the separate [agent interaction decision tree](agent-interaction-decision-tree.md). API, MCP, framework-native invocation and A2A are candidates according to the required interaction contract. The receiving agent independently chooses its source-access interfaces.
+
+Define source age, consistency and response deadlines separately. For an agent result, preserve source observations separately from the time the agent generated its answer.
 
 ## MCP runtime paths
 
@@ -48,7 +54,7 @@ The registry holds approved endpoints and ownership metadata. Runtime enforcemen
 | Custom adapter on a container platform | Composition or transformation is needed | Workload identity, secrets, patching, health, rollback and downstream controls |
 | Vendor package hosted by the enterprise | Vendor supports self-hosting | Licensing, support, upgrades and isolation |
 | Vendor-hosted MCP through an egress gateway | Provider operates the service | Tenant isolation, OAuth compatibility, data handling and vendor change control |
-| Native platform tool over API | One runtime meets the requirement | Equivalent authorization and governed-action enforcement |
+| Native platform tool over API | Existing API integration or shared connector meets the requirement | Equivalent authorization and governed-action enforcement |
 
 OAuth discovery, redirect behavior and resource audiences must work through the actual gateway consumer URL. Obtain downstream credentials through an approved flow with the proper audience and scope. Verify token handling against the authorization specification applicable to the deployment.
 

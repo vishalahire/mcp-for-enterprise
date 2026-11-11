@@ -24,29 +24,31 @@ The decision tree is an architectural synthesis. A protocol specification establ
 - [OpenAPI Specification 3.2.1](https://spec.openapis.org/oas/v3.2.1.html)
 - [Anthropic on writing effective tools](https://www.anthropic.com/engineering/writing-tools-for-agents)
 
-## Agent and tool decision model
+## System access and agent interaction decisions
 
 Focused review — 11 November 2026.
 
-The revised [decision tree](decision-tree.md) starts with a caller needing current information from another system. A2A documentation distinguishes tool use from collaboration with an independent agent. MCP specifies a tool interface through which a caller can query systems and invoke computations. These roles can coexist.
+The [system access decision tree](decision-tree.md) asks how an agent should obtain current information from an internal or third-party system through API tools, existing MCP or a new MCP interface. The [comparison guide](api-vs-mcp.md) explains why existing APIs remain valid and where MCP adds value. The [agent interaction tree](agent-interaction-decision-tree.md) separately evaluates API, MCP and A2A when the provider is another agent.
 
-Anthropic's December 2024 article distinguishes predefined workflows from model-directed execution and discusses latency and cost tradeoffs. Its historical tooling examples carry an age warning, so this project uses its architectural reasoning. Anthropic's June 2025 research-system case study describes parallel research benefits alongside coordination and token costs. Its results are workload-specific.
+| Primary evidence | Documented contribution | Project interpretation |
+| --- | --- | --- |
+| OpenAI function calling | Applications can execute defined tools against external systems | An API-backed tool is a valid integration option |
+| OpenAI MCP guide | Remote MCP integration, tool filtering and approvals | MCP is another supported integration path, requiring explicit controls |
+| Microsoft API Management | Selected REST operations can be exposed as MCP tools | Existing APIs can remain authoritative beneath an MCP interface |
+| MCP tools and security guidance | Standard tool interface and security responsibilities | MCP does not itself guarantee business authorization or freshness |
+| Anthropic tool engineering | Tool selection, concise results, descriptions and evaluations | Tool quality must be assessed separately from transport choice |
+| A2A comparison | Agent collaboration and tool integration are complementary | Choose the interaction contract before selecting the peer protocol |
 
-The resulting recommendation is to use bounded tool access for retrieval and predefined operations, and qualify specialist delegation when it adds needed expertise or task ownership. An existing caller can also reason over tools without adding another agent.
+The preference for the simplest qualified existing path, the comparative cost model, freshness gates and scenario outcomes are project recommendations. They are not normative protocol rules or claims about enterprise adoption prevalence. Concur-like examples are hypothetical; no vendor MCP availability or tenant entitlement is asserted.
 
-The freshness contract, equivalent-workload benchmarking, bounded delegation and record-level authorization checks in the decision guide are this project's proposed design criteria. Protocol choice alone establishes none of those guarantees.
-
-| Evidence | Supports |
-| --- | --- |
-| MCP tools specification | Defined tool discovery and invocation for external capabilities |
-| A2A comparison | Complementary agent collaboration and tool integration roles |
-| Anthropic workflow guidance | Reasoning ownership and complexity tradeoffs |
-| Anthropic research-system case study | Evaluating parallelism, coordination and resource costs |
-| MCP security guidance | Trust boundaries, token handling and downstream security responsibilities |
-
+- [OpenAI function calling](https://developers.openai.com/api/docs/guides/function-calling)
+- [OpenAI MCP servers](https://developers.openai.com/api/docs/guides/tools-connectors-mcp)
+- [Microsoft API to MCP exposure](https://learn.microsoft.com/en-us/azure/api-management/export-rest-mcp-server)
+- [Anthropic writing effective tools](https://www.anthropic.com/research/writing-tools-for-agents)
+- [MCP security guidance for the 2025-11-25 profile](https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices)
 - [A2A and MCP comparison](https://a2a-protocol.org/latest/topics/a2a-and-mcp/)
-- [Anthropic building effective agents](https://www.anthropic.com/research/building-effective-agents)
-- [Anthropic multi-agent research system](https://www.anthropic.com/research/multi-agent-research-system)
+
+Anthropic's [building effective agents](https://www.anthropic.com/research/building-effective-agents) and [multi-agent research system](https://www.anthropic.com/research/multi-agent-research-system) provide additional architectural context for evaluating reasoning, coordination and resource costs. Historical examples and workload-specific results are not universal performance guarantees.
 
 ## Provider implementation examples
 

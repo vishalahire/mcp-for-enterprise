@@ -10,7 +10,9 @@ This project helps architects and engineering teams choose an integration approa
 
 | Your question | Guide |
 | --- | --- |
-| Should an agent call a tool or delegate to a specialist, and when should the tool use MCP? | [Agent and tool decision tree](docs/decision-tree.md) |
+| Should my agent use an existing API, reuse MCP or introduce MCP for current system information? | [System access decision tree](docs/decision-tree.md) |
+| Why would I need MCP when APIs already exist? | [API versus MCP comparison](docs/api-vs-mcp.md) |
+| How should my agent interact with another agent through API, MCP or A2A? | [Agent interaction decision tree](docs/agent-interaction-decision-tree.md) |
 | How do gateways, adapters and existing APIs fit together? | [Reference architecture](docs/reference-architecture.md) |
 | How should tools be reviewed, registered and operated? | [Governance and lifecycle](docs/governance.md) |
 | How do I govern create, update and delete actions? | [Governed actions](docs/governed-actions.md) |
@@ -20,8 +22,9 @@ This project helps architects and engineering teams choose an integration approa
 
 ## Approach
 
-- Decide whether the caller should use a tool or delegate responsibility to a specialist agent.
-- Choose MCP, native API tooling or an agent interface after defining that responsibility.
+- Treat existing APIs as valid agent tools; adopt MCP for demonstrated interoperability, reuse or management value.
+- Qualify API and MCP paths independently before selecting one for each capability.
+- Choose API, MCP or A2A separately when the provider is another agent.
 - Specify source freshness, security boundaries and measured performance budgets.
 - Reuse domain services and managed APIs when exposing MCP tools.
 - Design tools around bounded business tasks with clear inputs and outputs.
@@ -35,7 +38,7 @@ Recommendations describe a proposed enterprise operating model. Normative protoc
 
 The reference landscape includes existing HTTP APIs, hosted SaaS integrations, container-hosted adapters, API management, an MCP gateway and registry, and heterogeneous agent runtimes. Organizations can map these roles to their own products.
 
-The research baseline is 10 November 2026, with the agent and tool decision model reviewed on 11 November 2026. Sources and compatibility considerations are maintained in the [research guide](docs/research-and-sources.md).
+The research baseline is 10 November 2026, with the system access and agent interaction decision models reviewed on 11 November 2026. Sources and compatibility considerations are maintained in the [research guide](docs/research-and-sources.md).
 
 ## License
 

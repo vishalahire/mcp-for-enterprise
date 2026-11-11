@@ -4,7 +4,7 @@ The project starts with architecture research and reviewable enterprise patterns
 
 | Stage | Deliverable | Completion evidence |
 | --- | --- | --- |
-| Documentation foundation | Decision tree, reference architecture, governance, governed actions and source register | Published and internally linked guides |
+| Documentation foundation | System access and agent interaction trees, API/MCP comparison, reference architecture, governance, governed actions and source register | Published and internally linked guides |
 | Contract design | Versioned server manifest and action-policy schema | Reviewed examples and validation rules |
 | Read-only reference | Small MCP adapter over a synthetic HTTP service | Two clients demonstrate equivalent discovery and invocation |
 | Governed update reference | Preview, durable approval and conditional execution | Changed arguments, expiry, concurrent updates and retries behave correctly |
